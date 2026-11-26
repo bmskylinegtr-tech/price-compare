@@ -30,7 +30,7 @@ function parseCSV(text: string): Record<string, string>[] {
 }
 
 async function fetchRows(url: string) {
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { cache: process.env.NODE_ENV === "production" ? "force-cache" : "no-store" });
   if (!res.ok) throw new Error(`โหลด Google Sheets ไม่สำเร็จ (${res.status}): ${url}`);
   return parseCSV(await res.text());
 }
