@@ -1,0 +1,10 @@
+name: Daily rebuild
+on:
+  schedule:
+    - cron: "0 22 * * *" # 05:00 เวลาไทย
+  workflow_dispatch:
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -X POST "${{ secrets.DEPLOY_HOOK_URL }}"
